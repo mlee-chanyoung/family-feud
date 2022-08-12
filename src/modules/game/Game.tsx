@@ -14,8 +14,6 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
   const [activeTeam, setActiveTeam] = useState<number>(0);
 
   const handleScore = (score: number) => {
-    if (activeTeam === 0) return;
-
     const updateActiveTeam = activeTeam === 1 ? setTeam1 : setTeam2;
     updateActiveTeam((team) => ({ score: team.score + score }));
   }

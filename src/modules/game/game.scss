@@ -40,6 +40,7 @@
   &-board {
     flex-grow: 1;
     text-align: center;
+    margin-top: -80px;
 
     &-grid {
       display: grid;
@@ -111,6 +112,17 @@
       border: 1px solid #84cff4;
       width: 50px;
     }
+  }
+
+  &-score {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 20px;
+    max-width: 200px;
+    // position: absolute;
+    // top: 10px;
+    // left: 50%;
+    // right: 50%;
   }
 
   &-wrong-counter {

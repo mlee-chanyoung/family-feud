@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ScoreDisplay } from "./ScoreDisplay";
 import { WrongPopup } from "./WrongPopup";
 import { Button } from "../../components/button";
 import { Answer, Question } from "../../models";
@@ -29,7 +30,8 @@ interface FeudProps {
 
 export const Feud = ({ onFailed, onScore, question, started }: FeudProps) => {
   const [gridState, setGridState] = useState<Array<AnswerDisplay>>(transposeAnswerGrid(question.answers));
-  const [accumlatedPoints, setAccumulatedPoints] = useState(0);
+  const [accumulatedPoints, setAccumulatedPoints] = useState(0);
+  const [rightAnswers, setRightAnswers] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState<Array<boolean>>([]);
   const [showWrongPopup, setShowWrongPopup] = useState(false);
 
@@ -40,8 +42,12 @@ export const Feud = ({ onFailed, onScore, question, started }: FeudProps) => {
     const index = updatedState.findIndex((initial) => initial.position === display.position);
     updatedState[index] = { ...display, revealed: true };
     setGridState(updatedState);
-    setAccumulatedPoints(accumlatedPoints + display.answer.value);
-    onScore(display.answer.value);
+    setAccumulatedPoints(accumulatedPoints + display.answer.value);
+    setRightAnswers(rightAnswers + 1);
+
+    if (wrongAnswers.length > 2 || rightAnswers + 1 >= question.answers.length) {
+      onScore(accumulatedPoints + display.answer.value);
+    }
   };
 
   const handleWrong = () => {
@@ -49,6 +55,13 @@ export const Feud = ({ onFailed, onScore, question, started }: FeudProps) => {
 
     setWrongAnswers([...wrongAnswers, true]);
     setShowWrongPopup(true);
+  };
+
+  const handleWrongClose = () => {
+    setShowWrongPopup(false)
+    if (wrongAnswers.length > 3) {
+      onScore(accumulatedPoints);
+    }
   };
 
   useEffect(() => {
@@ -59,7 +72,8 @@ export const Feud = ({ onFailed, onScore, question, started }: FeudProps) => {
 
   return (
     <>
-      { showWrongPopup ? <WrongPopup onClick={() => setShowWrongPopup(false)} /> : <></> }
+      { showWrongPopup ? <WrongPopup onClick={handleWrongClose} /> : <></> }
+      <ScoreDisplay active={false} className="game-score" onClick={() => null} team={{ score: accumulatedPoints }} />
       <div className="game-board-grid margin-bottom-medium">
         { gridState.map((answer, i) => <AnswerTile key={i} display={answer} onReveal={handleReveal} /> )}
       </div>
