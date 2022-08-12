@@ -24,6 +24,10 @@
 
 body {
   margin: 0;
+  background-color: #041f91;
+  background-image: radial-gradient(#000118 33%, #021a8a);
+
+  color: #fff;
   font-family: 'Helvetica condensed', 'Helvetica', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

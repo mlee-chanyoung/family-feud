@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Layout } from "./layout/Layout";
 import { Game } from "./modules/game/Game";
 import { Home } from "./modules/home/Home";
 
@@ -14,11 +13,11 @@ export const App = () => {
 
   switch (gameState) {
     case GameState.PROGRESS:
-      return <Layout><Game onEnd={() => setGameState(GameState.END)} /></Layout>;
+      return <Game onEnd={() => setGameState(GameState.END)} />;
     case GameState.END:
-      return <Layout><></></Layout>;
+      return <></>;
     case GameState.START:
     default:
-      return <Layout><Home onStart={() => setGameState(GameState.PROGRESS)} /></Layout>;
+      return <Home onStart={() => setGameState(GameState.PROGRESS)} />;
   }
 };
