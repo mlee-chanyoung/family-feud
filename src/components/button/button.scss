@@ -1,0 +1,25 @@
+.button {
+  cursor: pointer;
+  border: 3px solid #fff;
+  border-radius: 8px;
+  background-color: transparent;
+  padding: 8px 15px;
+  color: #fff;
+  font-family: 'Helvetica condensed', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.15s ease-in-out;
+
+  &:hover {
+    background-color: rgba(#fff, 0.1);
+  }
+
+  &--medium {
+    padding: 12px 24px;
+    font-size: 18px;
+  }
+
+  &--large {
+    padding: 15px 30px;
+    font-size: 24px;
+  }
+}

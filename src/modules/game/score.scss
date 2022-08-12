@@ -1,0 +1,16 @@
+.score {
+  border: 20px solid #544150;
+  border-radius: 15px;
+  background-image: radial-gradient(#34c9c0, #000357 90%, #000357);
+  padding: 10px 30px;
+  min-width: 120px;
+
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+
+  &--active {
+    box-shadow: 0px 0px 15px 0px #fff;
+  }
+}

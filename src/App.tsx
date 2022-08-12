@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { GameEnd } from "./modules/end/End";
+import { Game } from "./modules/game/Game";
+import { Home } from "./modules/home/Home";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+enum GameState {
+  START = "start",
+  PROGRESS = "progress",
+  END = "end",
+};
 
-export default App;
+export const App = () => {
+  const [gameState, setGameState] = useState<GameState>(GameState.START);
+  const [winningTeam, setWinningTeam] = useState<{ score: number, team: number }>();
+
+  const handleGameEnd = (team: number, score: number) => {
+    setWinningTeam({ team, score });
+    setGameState(GameState.END)
+  };
+
+  switch (gameState) {
+    case GameState.PROGRESS:
+      return <Game onEnd={handleGameEnd} />;
+    case GameState.END:
+      return <GameEnd onRestart={() => setGameState(GameState.PROGRESS)} team={winningTeam?.team || 0} score={winningTeam?.score || 0} />;
+    case GameState.START:
+    default:
+      return <Home onStart={() => setGameState(GameState.PROGRESS)} />;
+  }
+};
