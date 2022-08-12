@@ -40,7 +40,7 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
       <div className="game-border-outer">
         <div className="game-border-inner">
           <div className="game-content">
-            <ScoreDisplay active={activeTeam === 1} onClick={activeTeam ? () => null : () => setActiveTeam(1)} team={team1} />
+            <ScoreDisplay active={activeTeam === 1} onClick={() => setActiveTeam(1)} team={team1} />
             <div className="game-board">
               {
                 question
@@ -48,7 +48,7 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
                 : <QuestionSelector onSelect={(question) => setQuestion(question)} />
               }
             </div>
-            <ScoreDisplay active={activeTeam === 2} onClick={activeTeam ? () => null : () => setActiveTeam(2)} team={team2} />
+            <ScoreDisplay active={activeTeam === 2} onClick={() => setActiveTeam(2)} team={team2} />
           </div>
         </div>
       </div>
