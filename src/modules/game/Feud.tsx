@@ -49,7 +49,7 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
     if (!started) return;
 
     playRight();
-    
+
     const updatedState = [...gridState];
     const index = updatedState.findIndex((initial) => initial.position === display.position);
     updatedState[index] = { ...display, revealed: true };
@@ -99,7 +99,7 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
       </div>
       <Button buttonSize="medium" onClick={handleWrong}>That ain’t it</Button>
       <div className="game-wrong-counter">
-        {wrongAnswers.map(() => <img src="/img/x.png" />)}
+        {wrongAnswers.map((_wrong, i) => <img key={i} src="/img/x.png" />)}
       </div>
     </>
   );
