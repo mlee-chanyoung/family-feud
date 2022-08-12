@@ -83,8 +83,9 @@
 
       button {
         cursor: pointer;
+        transition: box-shadow 0.15s ease-in-out;
 
-        &:focus {
+        &:hover, &:focus {
           box-shadow: 0px 0px 15px 0px #fff;
         }
       }
