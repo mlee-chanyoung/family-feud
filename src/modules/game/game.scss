@@ -112,4 +112,18 @@
       width: 50px;
     }
   }
+
+  &-wrong-counter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    img {
+      width: 75px;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
 }

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { WrongPopup } from "./WrongPopup";
+import { Button } from "../../components/button";
 import { Answer, Question } from "../../models";
 
 
@@ -20,17 +22,20 @@ const transposeAnswerGrid = (answers: Array<Answer>): Array<AnswerDisplay> => {
 
 interface FeudProps {
   onScore: (score: number) => void,
+  onFailed: () => void,
   started: boolean,
   question: Question,
 }
 
-export const Feud = ({ onScore, question, started }: FeudProps) => {
+export const Feud = ({ onFailed, onScore, question, started }: FeudProps) => {
   const [gridState, setGridState] = useState<Array<AnswerDisplay>>(transposeAnswerGrid(question.answers));
   const [accumlatedPoints, setAccumulatedPoints] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState<Array<boolean>>([]);
+  const [showWrongPopup, setShowWrongPopup] = useState(false);
 
   const handleReveal = (display: AnswerDisplay) => {
     if (!started) return;
-    
+
     const updatedState = [...gridState];
     const index = updatedState.findIndex((initial) => initial.position === display.position);
     updatedState[index] = { ...display, revealed: true };
@@ -39,10 +44,30 @@ export const Feud = ({ onScore, question, started }: FeudProps) => {
     onScore(display.answer.value);
   };
 
+  const handleWrong = () => {
+    if (!started) return;
+
+    setWrongAnswers([...wrongAnswers, true]);
+    setShowWrongPopup(true);
+  };
+
+  useEffect(() => {
+    if (wrongAnswers.length > 2) {
+      onFailed();
+    }
+  }, [wrongAnswers]);
+
   return (
-    <div className="game-board-grid">
-      { gridState.map((answer, i) => <AnswerTile key={i} display={answer} onReveal={handleReveal} /> )}
-    </div>
+    <>
+      { showWrongPopup ? <WrongPopup onClick={() => setShowWrongPopup(false)} /> : <></> }
+      <div className="game-board-grid margin-bottom-medium">
+        { gridState.map((answer, i) => <AnswerTile key={i} display={answer} onReveal={handleReveal} /> )}
+      </div>
+      <Button buttonSize="medium" onClick={handleWrong}>That ain’t it</Button>
+      <div className="game-wrong-counter">
+        {wrongAnswers.map(() => <img src="/img/x.png" />)}
+      </div>
+    </>
   );
 };
 
