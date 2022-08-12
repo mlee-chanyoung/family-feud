@@ -22,6 +22,11 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
     setActiveTeam((activeTeam) => activeTeam === 1 ? 2 : 1);
   };
 
+  const handleRoundEnd = () => {
+    setActiveTeam(0);
+    setQuestion(undefined);
+  };
+
   return (
     <div className="game">
       <div className="game-border-outer">
@@ -31,7 +36,7 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
             <div className="game-board">
               {
                 question
-                ? <Feud question={question} onFailed={handleFail} onScore={handleScore} started={Boolean(activeTeam)} />
+                ? <Feud question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
                 : <QuestionSelector onSelect={(question) => setQuestion(question)} />
               }
             </div>
