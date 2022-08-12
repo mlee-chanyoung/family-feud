@@ -1,6 +1,13 @@
 @font-face {
   font-family: "Helvetica condensed";
   src: url("./assets/font/helvetica_condensed.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Helvetica condensed";
+  src: url("./assets/font/helvetica_condensed_bold.ttf") format("truetype");
+  font-weight: 700;
 }
 
 @font-face {
@@ -10,7 +17,7 @@
 }
 
 @font-face {
-  font-family: "Silkscreen bold";
+  font-family: "Silkscreen";
   src: url("./assets/font/Silkscreen-Bold.ttf") format("truetype");
   font-weight: 700;
 }
@@ -29,4 +36,11 @@ code {
 
 html, body, #root {
   height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: "Silkscreen";
+  font-weight: 700;
 }
