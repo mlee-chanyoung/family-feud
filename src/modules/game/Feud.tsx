@@ -18,16 +18,25 @@ const transposeAnswerGrid = (answers: Array<Answer>): Array<AnswerDisplay> => {
   ];
 };
 
-export const Feud = ({ question }: { question: Question }) => {
+interface FeudProps {
+  onScore: (score: number) => void,
+  started: boolean,
+  question: Question,
+}
+
+export const Feud = ({ onScore, question, started }: FeudProps) => {
   const [gridState, setGridState] = useState<Array<AnswerDisplay>>(transposeAnswerGrid(question.answers));
   const [accumlatedPoints, setAccumulatedPoints] = useState(0);
 
   const handleReveal = (display: AnswerDisplay) => {
+    if (!started) return;
+    
     const updatedState = [...gridState];
     const index = updatedState.findIndex((initial) => initial.position === display.position);
     updatedState[index] = { ...display, revealed: true };
     setGridState(updatedState);
     setAccumulatedPoints(accumlatedPoints + display.answer.value);
+    onScore(display.answer.value);
   };
 
   return (

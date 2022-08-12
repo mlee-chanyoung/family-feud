@@ -9,20 +9,31 @@ import { Question, Team } from "../../models";
 
 export const Game = ({ onEnd }: { onEnd: () => void }) => {
   const [question, setQuestion] = useState<Question>();
-  const [team1] = useState<Team>({ score: 0 });
-  const [team2] = useState<Team>({ score: 0 });
-  const [activeTeam, setActiveTeam] = useState<Team>();
+  const [team1, setTeam1] = useState<Team>({ score: 0 });
+  const [team2, setTeam2] = useState<Team>({ score: 0 });
+  const [activeTeam, setActiveTeam] = useState<number>(0);
+
+  const handleScore = (score: number) => {
+    if (activeTeam === 0) return;
+
+    const updateActiveTeam = activeTeam === 1 ? setTeam1 : setTeam2;
+    updateActiveTeam((team) => ({ score: team.score + score }));
+  }
 
   return (
     <div className="game">
       <div className="game-border-outer">
         <div className="game-border-inner">
           <div className="game-content">
-            <ScoreDisplay team={team1} />
+            <ScoreDisplay active={activeTeam === 1} onClick={activeTeam ? () => null : () => setActiveTeam(1)} team={team1} />
             <div className="game-board">
-              {question ? <Feud question={question} /> : <QuestionSelector onSelect={(question) => setQuestion(question)} />}
+              {
+                question
+                ? <Feud question={question} onScore={handleScore} started={Boolean(activeTeam)} />
+                : <QuestionSelector onSelect={(question) => setQuestion(question)} />
+              }
             </div>
-            <ScoreDisplay team={team2} />
+            <ScoreDisplay active={activeTeam === 2} onClick={activeTeam ? () => null : () => setActiveTeam(2)} team={team2} />
           </div>
         </div>
       </div>
