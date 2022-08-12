@@ -7,7 +7,7 @@ import { ScoreDisplay } from "./ScoreDisplay";
 
 import { Question, Team } from "../../models";
 
-export const Game = ({ onEnd }: { onEnd: () => void }) => {
+export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }) => {
   const [question, setQuestion] = useState<Question>();
   const [team1, setTeam1] = useState<Team>({ score: 0 });
   const [team2, setTeam2] = useState<Team>({ score: 0 });
@@ -26,7 +26,12 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
   const handleRoundEnd = () => {
     setActiveTeam(0);
     setQuestion(undefined);
-    setRound(round + 1);
+
+    if (round >= 3) {
+      onEnd(activeTeam, activeTeam === 1 ? team1.score : team2.score);
+    } else {
+      setRound(round + 1);
+    }
   };
 
   return (
