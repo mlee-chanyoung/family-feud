@@ -12,6 +12,7 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
   const [team1, setTeam1] = useState<Team>({ score: 0 });
   const [team2, setTeam2] = useState<Team>({ score: 0 });
   const [activeTeam, setActiveTeam] = useState<number>(0);
+  const [round, setRound] = useState(1);
 
   const handleScore = (score: number) => {
     const updateActiveTeam = activeTeam === 1 ? setTeam1 : setTeam2;
@@ -25,6 +26,7 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
   const handleRoundEnd = () => {
     setActiveTeam(0);
     setQuestion(undefined);
+    setRound(round + 1);
   };
 
   return (
@@ -36,13 +38,17 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
             <div className="game-board">
               {
                 question
-                ? <Feud question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
+                ? <Feud double={round > 2} question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
                 : <QuestionSelector onSelect={(question) => setQuestion(question)} />
               }
             </div>
             <ScoreDisplay active={activeTeam === 2} onClick={activeTeam ? () => null : () => setActiveTeam(2)} team={team2} />
           </div>
         </div>
+      </div>
+      <div className="game-round">
+        <div>Round</div>
+        <div className="game-round-count">{round}</div>
       </div>
     </div>
   );

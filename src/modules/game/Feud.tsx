@@ -22,6 +22,7 @@ const transposeAnswerGrid = (answers: Array<Answer>): Array<AnswerDisplay> => {
 };
 
 interface FeudProps {
+  double: boolean,
   onFailed: () => void,
   onRoundEnd: () => void,
   onScore: (score: number) => void,
@@ -29,7 +30,7 @@ interface FeudProps {
   question: Question,
 }
 
-export const Feud = ({ onFailed, onRoundEnd, onScore, question, started }: FeudProps) => {
+export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started }: FeudProps) => {
   const [gridState, setGridState] = useState<Array<AnswerDisplay>>(transposeAnswerGrid(question.answers));
   const [accumulatedPoints, setAccumulatedPoints] = useState(0);
   const [rightAnswers, setRightAnswers] = useState(0);
@@ -44,11 +45,12 @@ export const Feud = ({ onFailed, onRoundEnd, onScore, question, started }: FeudP
     const index = updatedState.findIndex((initial) => initial.position === display.position);
     updatedState[index] = { ...display, revealed: true };
     setGridState(updatedState);
-    setAccumulatedPoints(accumulatedPoints + display.answer.value);
     setRightAnswers(rightAnswers + 1);
 
+    const points = accumulatedPoints + (display.answer.value * (double ? 2 : 1));
+    setAccumulatedPoints(points);
     if (wrongAnswers.length > 2 || rightAnswers + 1 >= question.answers.length) {
-      handleScore(accumulatedPoints + display.answer.value);
+      handleScore(points);
     }
   };
 
