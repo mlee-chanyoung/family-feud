@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./game.scss";
+import { Feud } from "./Feud";
 import { QuestionSelector } from "./QuestionSelector";
 import { ScoreDisplay } from "./ScoreDisplay";
 
@@ -19,7 +20,7 @@ export const Game = ({ onEnd }: { onEnd: () => void }) => {
           <div className="game-content">
             <ScoreDisplay team={team1} />
             <div className="game-board">
-              {question ? <></> : <QuestionSelector onSelect={(question) => setQuestion(question)} />}
+              {question ? <Feud question={question} /> : <QuestionSelector onSelect={(question) => setQuestion(question)} />}
             </div>
             <ScoreDisplay team={team2} />
           </div>

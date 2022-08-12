@@ -63,20 +63,53 @@
   }
 
   &-option {
-    border: 2px solid $answer-border-color;
-    border-radius: 1px;
-    background-image: linear-gradient($answer-initial-gradient-start, $answer-intiial-gradient-end);
-    padding: 10px;
+    flex-grow: 1;
 
-    color: #fff;
-    font-family: "Helvetica condensed", "Helvetica", sans-serif;
-    font-size: 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
+    &, &-value {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: linear-gradient($answer-initial-gradient-start, $answer-intiial-gradient-end);
+      padding: 10px;
+    }
+
+    &, &-container {
+      color: #fff;
+      font-family: "Helvetica condensed", "Helvetica", sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: uppercase;
+
+      button {
+        cursor: pointer;
+      }
+    }
 
     &--revealed {
+      background-image: linear-gradient(#042ba6, #0853c2, #020a5e);
+    }
 
+    &-container {
+      display: flex;
+      border: 2px solid $answer-border-color;
+      border-radius: 1px;
+      height: 75px;
+    }
+
+    &-position {
+      border: 3px solid #172e7c;
+      border-radius: 50%;
+      background-color: #01023a;
+      padding: 2px 15px;
+
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    &-value {
+      box-sizing: border-box;
+      border: 1px solid #84cff4;
+      width: 50px;
     }
   }
 }

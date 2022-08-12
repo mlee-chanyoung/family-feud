@@ -5,6 +5,9 @@ export const QUESTIONS: Array<Question> = [
     question: "What was your first impression of Sam?",
     answers: [
       { response: "Thicc", value: 50 },
+      { response: "FOB", value: 30 },
+      { response: "A dude", value: 13 },
+      { response: "Someone", value: 7 },
     ],
   },
   {
