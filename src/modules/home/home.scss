@@ -1,0 +1,23 @@
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &-content {
+    text-align: center;
+
+    h1 {
+      font-family: "Silkscreen";
+      font-size: 40px;
+    }
+    .button {
+      font-family: "Silkscreen";
+    }
+  }
+
+  &-logo {
+    margin-bottom: 30px;
+    max-width: 800px;
+  }
+}

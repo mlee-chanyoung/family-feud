@@ -1,5 +1,8 @@
+import { Layout } from "./layout/Layout";
+import { Home } from "./modules/home/Home";
+
 export const App = () => {
-  return (
-    <h1>My title</h1>
-  );
+  const content = <Home />;
+
+  return <Layout>{content}</Layout>;
 };
