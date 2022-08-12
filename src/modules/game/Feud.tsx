@@ -64,11 +64,12 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
   };
 
   const handleWrong = () => {
-    if (!started) return;
-
     playWrong();
-    setWrongAnswers([...wrongAnswers, true]);
     setShowWrongPopup(true);
+
+    if (started) {
+      setWrongAnswers([...wrongAnswers, true]);
+    }
   };
 
   const handleWrongClose = () => {
