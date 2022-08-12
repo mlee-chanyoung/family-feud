@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
+import useSound from "use-sound";
+
 import { ScoreDisplay } from "./ScoreDisplay";
 import { WrongPopup } from "./WrongPopup";
+
+import rightSound from "../../assets/sound/right.mp3";
+import wrongSound from "../../assets/sound/wrong.mp3";
 import { Button } from "../../components/button";
 import { Answer, Question } from "../../models";
 
@@ -31,6 +36,8 @@ interface FeudProps {
 }
 
 export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started }: FeudProps) => {
+  const [playWrong] = useSound(wrongSound);
+  const [playRight] = useSound(rightSound);
   const [gridState, setGridState] = useState<Array<AnswerDisplay>>(transposeAnswerGrid(question.answers));
   const [accumulatedPoints, setAccumulatedPoints] = useState(0);
   const [rightAnswers, setRightAnswers] = useState(0);
@@ -41,6 +48,8 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
   const handleReveal = (display: AnswerDisplay) => {
     if (!started) return;
 
+    playRight();
+    
     const updatedState = [...gridState];
     const index = updatedState.findIndex((initial) => initial.position === display.position);
     updatedState[index] = { ...display, revealed: true };
@@ -57,6 +66,7 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
   const handleWrong = () => {
     if (!started) return;
 
+    playWrong();
     setWrongAnswers([...wrongAnswers, true]);
     setShowWrongPopup(true);
   };
