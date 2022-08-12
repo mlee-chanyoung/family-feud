@@ -28,7 +28,8 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
     setQuestion(undefined);
 
     if (round >= 3) {
-      onEnd(activeTeam, activeTeam === 1 ? team1.score : team2.score);
+      const winningTeam = team1.score > team2.score ? 1 : 2;
+      onEnd(winningTeam, winningTeam === 1 ? team1.score : team2.score);
     } else {
       setRound(round + 1);
     }
