@@ -5,15 +5,21 @@ import { Feud } from "./Feud";
 import { QuestionSelector } from "./QuestionSelector";
 import { ScoreDisplay } from "./ScoreDisplay";
 
+import { Button } from "../../components/button";
 import { Question, Team } from "../../models";
 
-export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }) => {
+interface GameProps {
+  onEnd: (team: number, score: number) => void,
+  targetPoints: number;
+}
+export const Game = ({ onEnd, targetPoints }: GameProps) => {
   const [question, setQuestion] = useState<Question>();
   const [completedQuestions, setCompletedQuestions] = useState<Question[]>([]);
   const [team1, setTeam1] = useState<Team>({ score: 0 });
   const [team2, setTeam2] = useState<Team>({ score: 0 });
   const [activeTeam, setActiveTeam] = useState<number>(0);
   const [round, setRound] = useState(1);
+  const [double, setDouble] = useState(false);
 
   const handleScore = (score: number) => {
     const updateActiveTeam = activeTeam === 1 ? setTeam1 : setTeam2;
@@ -30,8 +36,9 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
       question && setCompletedQuestions((completed) => [...completed, question]);
       return undefined;
     });
+    setDouble(false);
 
-    if (round >= 3) {
+    if (team1.score >= targetPoints || team2.score >= targetPoints) {
       const winningTeam = team1.score > team2.score ? 1 : 2;
       onEnd(winningTeam, winningTeam === 1 ? team1.score : team2.score);
     } else {
@@ -42,6 +49,7 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
   const handleCancelQuestion = () => {
     setActiveTeam(0);
     setQuestion(undefined);
+    setDouble(false);
   }
 
   return (
@@ -50,11 +58,11 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
         <div className="game-border-inner">
           <div className="game-content">
             <ScoreDisplay active={activeTeam === 1} onClick={() => setActiveTeam(1)} team={team1} />
-            <div className="game-board">
+            <div className={`game-board ${double && "game-board-double"}`}>
               {
                 question
-                ? <Feud double={round > 2} question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
-                : <QuestionSelector completed={completedQuestions} onSelect={(question) => setQuestion(question)} />
+                ? <Feud double={double} question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
+                : <QuestionSelector completed={completedQuestions} double={double} onSelect={(question) => setQuestion(question)} />
               }
             </div>
             <ScoreDisplay active={activeTeam === 2} onClick={() => setActiveTeam(2)} team={team2} />
@@ -65,11 +73,17 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
         <div>Round</div>
         <div className="game-round-count">{round}</div>
       </div>
-      {question && (
+      {question ? (
         <div className="game-back">
-          <button className="button" onClick={handleCancelQuestion}>
+          <Button onClick={handleCancelQuestion}>
             Back
-          </button>
+          </Button>
+        </div>
+      ) : (
+        <div className="game-double">
+          <Button onClick={() => setDouble((prev) => !prev)}>
+            {double ? "Reset point value" : "Double point value"}
+          </Button>
         </div>
       )}
     </div>

@@ -46,7 +46,10 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
   const [showRoundEndOverlay, setShowRoundEndOverlay] = useState(false);
 
   const handleReveal = (display: AnswerDisplay) => {
-    if (!started) return;
+    if (!started) {
+      window.alert("Please select an active team to reveal answers.")
+      return;
+    };
 
     playRight();
 

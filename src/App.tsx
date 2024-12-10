@@ -21,7 +21,7 @@ export const App = () => {
 
   switch (gameState) {
     case GameState.PROGRESS:
-      return <Game onEnd={handleGameEnd} />;
+      return <Game onEnd={handleGameEnd} targetPoints={300} />;
     case GameState.END:
       return <GameEnd onRestart={() => setGameState(GameState.PROGRESS)} team={winningTeam?.team || 0} score={winningTeam?.score || 0} />;
     case GameState.START:
