@@ -1,7 +1,12 @@
 import { QUESTIONS } from "./questions";
 import { Question } from "../../models";
 
-export const QuestionSelector = ({ completed = [], onSelect }: { completed?: Question[], onSelect: (question: Question) => void }) => {
+interface QuestionSelectorProps {
+  completed?: Question[];
+  double?: boolean;
+  onSelect: (question: Question) => void;
+}
+export const QuestionSelector = ({ completed = [], double = false, onSelect }: QuestionSelectorProps) => {
   return (
     <>
       <h1>Select a question</h1>
@@ -16,6 +21,7 @@ export const QuestionSelector = ({ completed = [], onSelect }: { completed?: Que
           />
         )) }
       </div>
+      {double && <h2>DOUBLE POINT VALUE</h2>}
     </>
   );
 };
