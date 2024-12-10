@@ -9,6 +9,7 @@ import { Question, Team } from "../../models";
 
 export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }) => {
   const [question, setQuestion] = useState<Question>();
+  const [completedQuestions, setCompletedQuestions] = useState<Question[]>([]);
   const [team1, setTeam1] = useState<Team>({ score: 0 });
   const [team2, setTeam2] = useState<Team>({ score: 0 });
   const [activeTeam, setActiveTeam] = useState<number>(0);
@@ -25,7 +26,10 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
 
   const handleRoundEnd = () => {
     setActiveTeam(0);
-    setQuestion(undefined);
+    setQuestion((question) => {
+      question && setCompletedQuestions((completed) => [...completed, question]);
+      return undefined;
+    });
 
     if (round >= 3) {
       const winningTeam = team1.score > team2.score ? 1 : 2;
@@ -50,7 +54,7 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
               {
                 question
                 ? <Feud double={round > 2} question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
-                : <QuestionSelector onSelect={(question) => setQuestion(question)} />
+                : <QuestionSelector completed={completedQuestions} onSelect={(question) => setQuestion(question)} />
               }
             </div>
             <ScoreDisplay active={activeTeam === 2} onClick={() => setActiveTeam(2)} team={team2} />

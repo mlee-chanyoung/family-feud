@@ -123,6 +123,15 @@
       border: 1px solid #84cff4;
       width: 50px;
     }
+
+    &-complete {
+      display: block;
+      text-align: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 388.5px;
+    }
   }
 
   &-round {
