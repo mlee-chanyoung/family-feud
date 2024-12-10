@@ -35,6 +35,11 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
     }
   };
 
+  const handleCancelQuestion = () => {
+    setActiveTeam(0);
+    setQuestion(undefined);
+  }
+
   return (
     <div className="game">
       <div className="game-border-outer">
@@ -56,6 +61,13 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
         <div>Round</div>
         <div className="game-round-count">{round}</div>
       </div>
+      {question && (
+        <div className="game-back">
+          <button className="button" onClick={handleCancelQuestion}>
+            Back
+          </button>
+        </div>
+      )}
     </div>
   );
 };
