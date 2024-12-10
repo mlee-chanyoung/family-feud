@@ -11,7 +11,7 @@ export const Home = ({ onStart, onSettings }: HomeProps) => {
       <div className="home-content">
         <h1>Welcome to</h1>
         <img alt="Family Feud logo" className="home-logo" src="/img/logo.png" />
-        <div className="home-row">
+        <div className="margin-bottom-medium">
           <Button buttonSize="large" onClick={onStart}>Get Started</Button>
         </div>
         <div>
