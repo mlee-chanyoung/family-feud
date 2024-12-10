@@ -4,6 +4,7 @@ import { Game } from "./modules/game/Game";
 import { Home } from "./modules/home/Home";
 
 enum GameState {
+  SETTINGS = "settings",
   START = "start",
   PROGRESS = "progress",
   END = "end",
@@ -25,6 +26,6 @@ export const App = () => {
       return <GameEnd onRestart={() => setGameState(GameState.PROGRESS)} team={winningTeam?.team || 0} score={winningTeam?.score || 0} />;
     case GameState.START:
     default:
-      return <Home onStart={() => setGameState(GameState.PROGRESS)} />;
+      return <Home onStart={() => setGameState(GameState.PROGRESS)} onSettings={() => setGameState(GameState.SETTINGS)} />;
   }
 };
