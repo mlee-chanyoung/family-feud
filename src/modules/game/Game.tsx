@@ -73,14 +73,13 @@ export const Game = ({ onEnd, targetPoints }: GameProps) => {
         <div>Round</div>
         <div className="game-round-count">{round}</div>
       </div>
-      {question && (
+      {question ? (
         <div className="game-back">
           <Button onClick={handleCancelQuestion}>
             Back
           </Button>
         </div>
-      )}
-      {!question && (
+      ) : (
         <div className="game-double">
           <Button onClick={() => setDouble((prev) => !prev)}>
             {double ? "Reset point value" : "Double point value"}
