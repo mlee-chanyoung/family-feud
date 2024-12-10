@@ -7,7 +7,11 @@ import { ScoreDisplay } from "./ScoreDisplay";
 
 import { Question, Team } from "../../models";
 
-export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }) => {
+interface GameProps {
+  onEnd: (team: number, score: number) => void,
+  targetPoints: number;
+}
+export const Game = ({ onEnd, targetPoints }: GameProps) => {
   const [question, setQuestion] = useState<Question>();
   const [completedQuestions, setCompletedQuestions] = useState<Question[]>([]);
   const [team1, setTeam1] = useState<Team>({ score: 0 });
@@ -31,7 +35,7 @@ export const Game = ({ onEnd }: { onEnd: (team: number, score: number) => void }
       return undefined;
     });
 
-    if (round >= 3) {
+    if (team1.score >= targetPoints || team2.score >= targetPoints) {
       const winningTeam = team1.score > team2.score ? 1 : 2;
       onEnd(winningTeam, winningTeam === 1 ? team1.score : team2.score);
     } else {
