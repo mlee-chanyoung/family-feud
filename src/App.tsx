@@ -26,7 +26,7 @@ export const App = () => {
   };
   const updateSettings = (settings: SettingValues) => {
     setTargetScore(settings.targetScore);
-    setGameState(GameState.START);
+    setGameState(GameState.PROGRESS);
   };
 
   switch (gameState) {
@@ -41,7 +41,7 @@ export const App = () => {
     case GameState.END:
       return (
         <GameEnd
-          onRestart={() => setGameState(GameState.PROGRESS)}
+          onRestart={() => setGameState(GameState.SETTINGS)}
           team={winningTeam?.team || 0}
           score={winningTeam?.score || 0}
         />
@@ -56,11 +56,6 @@ export const App = () => {
       );
     case GameState.START:
     default:
-      return (
-        <Home
-          onStart={() => setGameState(GameState.PROGRESS)}
-          onSettings={() => setGameState(GameState.SETTINGS)}
-        />
-      );
+      return <Home onStart={() => setGameState(GameState.SETTINGS)} />;
   }
 };
