@@ -35,6 +35,6 @@ export const App = () => {
       return <Settings initial={{ targetScore }} onCancel={() => setGameState(GameState.START)} onSubmit={updateSettings} />
     case GameState.START:
     default:
-      return <Home onStart={() => setGameState(GameState.PROGRESS)} onSettings={() => setGameState(GameState.SETTINGS)} />;
+      return <Home onStart={() => setGameState(GameState.SETTINGS)} />;
   }
 };
