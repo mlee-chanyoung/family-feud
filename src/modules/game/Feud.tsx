@@ -43,6 +43,7 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
   const [rightAnswers, setRightAnswers] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState<Array<boolean>>([]);
   const [showWrongPopup, setShowWrongPopup] = useState(false);
+  const [revealAnswersWithoutScore, setRevealAnswersWithoutScore] = useState(false);
   const [showRoundEndOverlay, setShowRoundEndOverlay] = useState(false);
 
   const handleReveal = (display: AnswerDisplay) => {
@@ -59,10 +60,16 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
     setGridState(updatedState);
     setRightAnswers(rightAnswers + 1);
 
-    const points = accumulatedPoints + (display.answer.value * (double ? 2 : 1));
-    setAccumulatedPoints(points);
-    if (wrongAnswers.length > 2 || rightAnswers + 1 >= question.answers.length) {
-      handleScore(points);
+    const allAnswersRevealed = rightAnswers + 1 >= question.answers.length;
+    if (!revealAnswersWithoutScore) {
+      const points = accumulatedPoints + (display.answer.value * (double ? 2 : 1));
+      setAccumulatedPoints(points);
+      if (wrongAnswers.length > 2 || allAnswersRevealed) {
+        handleScore(points);
+      }
+    }
+    if (allAnswersRevealed) {
+      setShowRoundEndOverlay(true);
     }
   };
 
@@ -84,7 +91,7 @@ export const Feud = ({ double, onFailed, onRoundEnd, onScore, question, started 
 
   const handleScore = (points: number) => {
     onScore(points);
-    setShowRoundEndOverlay(true);
+    setRevealAnswersWithoutScore(true);
   };
 
   useEffect(() => {
