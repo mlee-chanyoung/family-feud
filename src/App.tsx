@@ -17,7 +17,7 @@ enum GameState {
 export const App = () => {
   const [gameState, setGameState] = useState<GameState>(GameState.START);
   const [winningTeam, setWinningTeam] = useState<{ score: number, team: number }>();
-  const [questionSet, setQuestionSet] = useState<Question[]>(undefined);
+  const [questionSet, setQuestionSet] = useState<Question[]>();
   const [targetScore, setTargetScore] = useState<number>(300);
 
   const handleGameEnd = (team: number, score: number) => {
