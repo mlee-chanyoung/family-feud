@@ -23,14 +23,14 @@ export const App = () => {
   };
   const updateSettings = (settings: SettingValues) => {
     setTargetScore(settings.targetScore);
-    setGameState(GameState.START);
+    setGameState(GameState.PROGRESS);
   };
 
   switch (gameState) {
     case GameState.PROGRESS:
       return <Game onEnd={handleGameEnd} targetPoints={targetScore} />;
     case GameState.END:
-      return <GameEnd onRestart={() => setGameState(GameState.PROGRESS)} team={winningTeam?.team || 0} score={winningTeam?.score || 0} />;
+      return <GameEnd onRestart={() => setGameState(GameState.SETTINGS)} team={winningTeam?.team || 0} score={winningTeam?.score || 0} />;
     case GameState.SETTINGS:
       return <Settings initial={{ targetScore }} onCancel={() => setGameState(GameState.START)} onSubmit={updateSettings} />
     case GameState.START:

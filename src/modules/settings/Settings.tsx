@@ -35,7 +35,7 @@ export const Settings = ({ initial = {}, onCancel, onSubmit }: SettingsProps) =>
         />
         <div className="settings-form-cta-group">
           <div>
-            <Button buttonSize="medium" type="submit">Save</Button>
+            <Button buttonSize="medium" type="submit">Start game</Button>
           </div>
           <div>
             <Button onClick={onCancel} type="reset">Cancel</Button>
