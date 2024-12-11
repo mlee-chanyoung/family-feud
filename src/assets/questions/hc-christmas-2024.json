@@ -1,0 +1,101 @@
+{
+  "title": "House Church Christmas 2024",
+  "questions": [
+    {
+      "question": "Name an item you’d need to dress up as Santa Claus.",
+      "answers": [
+        { "response": "Santa Hat", "value": 40 },
+        { "response": "Beard", "value": 24 },
+        { "response": "Big Belly", "value": 9 },
+        { "response": "Red Coat", "value": 8 },
+        { "response": "Red Pants / Belt", "value": 5 },
+        { "response": "Suspenders", "value": 2 },
+        { "response": "Black Boots", "value": 2 }
+      ]
+    },
+    {
+      "question": "Name a popular Christmas carol.",
+      "answers": [
+        { "response": "Jingle Bells", "value": 31 },
+        { "response": "Silent Night", "value": 15 },
+        { "response": "All I Want for Christmas", "value": 9 },
+        { "response": "We Wish You a Merry Christmas", "value": 5 },
+        { "response": "White Christmas", "value": 4 },
+        { "response": "Deck the Halls", "value": 4 },
+        { "response": "Frosty the Snowman", "value": 3 },
+        { "response": "O, Christmas Tree", "value": 3 }
+      ]
+    },
+    {
+      "question": "Name a classic kid’s Christmas movie.",
+      "answers": [
+        { "response": "Home Alone", "value": 23 },
+        { "response": "Elf", "value": 22 },
+        { "response": "The Grinch", "value": 14 },
+        { "response": "Charlie Brown Christmas", "value": 9 },
+        { "response": "A Christmas Story", "value": 8 },
+        { "response": "Frosty the Snowman", "value": 6 },
+        { "response": "Rudolph the Red-Nosed Reindeer", "value": 5 }
+      ]
+    },
+    {
+      "question": "Name a word or phrase that begins with “Snow”.",
+      "answers": [
+        { "response": "Snowflake", "value": 30 },
+        { "response": "Snowman", "value": 26 },
+        { "response": "Snowball", "value": 23 },
+        { "response": "Snow White", "value": 8 },
+        { "response": "Snow Angel", "value": 3 },
+        { "response": "Snowfall", "value": 3 }
+      ]
+    },
+    {
+      "question": "Name a drink that might be served at a Christmas party.",
+      "answers": [
+        { "response": "Eggnog", "value": 26 },
+        { "response": "Hot Cocoa", "value": 21 },
+        { "response": "Apple Cider", "value": 14 },
+        { "response": "Adult Beverage", "value": 13 },
+        { "response": "Soft Drink", "value": 10 },
+        { "response": "Punch", "value": 6 }
+      ]
+    },
+    {
+      "question": "Name one of Santa’s reindeer.",
+      "answers": [
+        { "response": "Rudolph", "value": 32 },
+        { "response": "Comet", "value": 14 },
+        { "response": "Donner", "value": 12 },
+        { "response": "Blitzen", "value": 11 },
+        { "response": "Cupid", "value": 9 },
+        { "response": "Prancer", "value": 6 },
+        { "response": "Dasher", "value": 4 },
+        { "response": "Vixen", "value": 3 }
+      ]
+    },
+    {
+      "question": "Name something you might find at the North Pole.",
+      "answers": [
+        { "response": "Snow", "value": 34 },
+        { "response": "Elves", "value": 22 },
+        { "response": "Santa Claus", "value": 16 },
+        { "response": "Santa’s Workshop", "value": 9 },
+        { "response": "Reindeer", "value": 5 },
+        { "response": "Ice", "value": 4 }
+      ]
+    },
+    {
+      "question": "Besides a Christmas tree, name something used as a decoration during Christmas.",
+      "answers": [
+        { "response": "Wreath", "value": 30 },
+        { "response": "Lights", "value": 14 },
+        { "response": "Garland", "value": 14 },
+        { "response": "Stockings", "value": 8 },
+        { "response": "Nativity Set", "value": 5 },
+        { "response": "Reindeer", "value": 5 },
+        { "response": "Snowman", "value": 4 },
+        { "response": "Angel", "value": 2 }
+      ]
+    }
+  ]
+}
