@@ -1,0 +1,13 @@
+{
+  "title": "House church Christmas 2024",
+  "questions": [
+    {
+      "question": "Test",
+      "answers": [
+        { "response": "Test 1", "value": 24 },
+        { "response": "Test 2", "value": 10 },
+        { "response": "Test 3", "value": 5 }
+      ]
+    }
+  ]
+}
