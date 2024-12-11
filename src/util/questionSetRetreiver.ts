@@ -2,10 +2,12 @@ import { Question } from "../models";
 import { QuestionSet } from "../models/questionSet";
 
 import questionSet1 from "../assets/questions/sam-and-amanda-goodbye.json"
+import questionSet2 from "../assets/questions/hc-christmas-2024.json"
 
 export class QuestionSetRetriever {
   static #questionSets: Record<string, QuestionSet> = {
     "set-1": questionSet1,
+    "set-2": questionSet2,
   }
 
   static get = (id: string) => {
