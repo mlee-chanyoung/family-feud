@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Question } from "./models";
 import { GameEnd } from "./modules/end/End";
 import { Game } from "./modules/game/Game";
-import { QUESTIONS } from "./modules/game/questions";
 import { Home } from "./modules/home/Home";
 import { Settings } from "./modules/settings/Settings";
 import { SettingValues } from "./modules/settings/type";
+import { QuestionSetRetriever } from "./util/questionSetRetreiver";
 
 enum GameState {
   SETTINGS = "settings",
@@ -17,7 +17,7 @@ enum GameState {
 export const App = () => {
   const [gameState, setGameState] = useState<GameState>(GameState.START);
   const [winningTeam, setWinningTeam] = useState<{ score: number, team: number }>();
-  const [questionSet] = useState<Question[]>(QUESTIONS);
+  const [questionSet, setQuestionSet] = useState<Question[]>(undefined);
   const [targetScore, setTargetScore] = useState<number>(300);
 
   const handleGameEnd = (team: number, score: number) => {
@@ -27,6 +27,7 @@ export const App = () => {
   const updateSettings = (settings: SettingValues) => {
     setTargetScore(settings.targetScore);
     setGameState(GameState.PROGRESS);
+    setQuestionSet(QuestionSetRetriever.get(settings.questionSetId).questions)
   };
 
   switch (gameState) {
