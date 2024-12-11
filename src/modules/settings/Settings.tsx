@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../components/button";
-import { Input } from "../../components/input";
+import { Input, Select } from "../../components/input";
+import { QuestionSetRetriever } from "../../util/questionSetRetreiver";
 import "./settings.scss";
 import { SettingValues } from "./type";
 
@@ -18,6 +19,9 @@ export const Settings = ({ initial = {}, onCancel, onSubmit }: SettingsProps) =>
   const onFormSubmit = (data: SettingValues) => {
     onSubmit(data);
   };
+  const setOptions = useMemo(() => {
+    return QuestionSetRetriever.getValidSets().map((option) => ({ label: option.title, value: option.id }));
+  }, [])
 
   return (
     <div className="settings">
@@ -26,11 +30,22 @@ export const Settings = ({ initial = {}, onCancel, onSubmit }: SettingsProps) =>
         <Input
           error={errors.targetScore?.message}
           fullWidth
+          groupProps={{ className: "margin-bottom-medium" }}
           label="Target score"
           {...register("targetScore", {
             required: "Must have a target score",
             min: { value: 1, message: "Must be greater than zero." },
             pattern: { value: /^-?\d+(\.\d+)?$/, message: "Must be a number." }
+          })}
+        />
+        <Select
+          error={errors.questionSetId?.message}
+          fullWidth
+          label="Question set"
+          placeholder="---"
+          options={setOptions}
+          {...register("questionSetId", {
+            required: "Must select a question set",
           })}
         />
         <div className="settings-form-cta-group">
