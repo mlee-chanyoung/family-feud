@@ -10,9 +10,10 @@ import { Question, Team } from "../../models";
 
 interface GameProps {
   onEnd: (team: number, score: number) => void,
+  questions: Question[];
   targetPoints: number;
 }
-export const Game = ({ onEnd, targetPoints }: GameProps) => {
+export const Game = ({ onEnd, questions, targetPoints }: GameProps) => {
   const [question, setQuestion] = useState<Question>();
   const [completedQuestions, setCompletedQuestions] = useState<Question[]>([]);
   const [team1, setTeam1] = useState<Team>({ score: 0 });
@@ -61,8 +62,23 @@ export const Game = ({ onEnd, targetPoints }: GameProps) => {
             <div className={`game-board ${double && "game-board-double"}`}>
               {
                 question
-                ? <Feud double={double} question={question} onFailed={handleFail} onRoundEnd={handleRoundEnd} onScore={handleScore} started={Boolean(activeTeam)} />
-                : <QuestionSelector completed={completedQuestions} double={double} onSelect={(question) => setQuestion(question)} />
+                ? (
+                  <Feud
+                    double={double}
+                    onFailed={handleFail}
+                    onRoundEnd={handleRoundEnd}
+                    onScore={handleScore}
+                    question={question}
+                    started={Boolean(activeTeam)}
+                  />
+                ) : (
+                  <QuestionSelector
+                    completed={completedQuestions}
+                    double={double}
+                    onSelect={(question) => setQuestion(question)}
+                    questions={questions}
+                  />
+                )
               }
             </div>
             <ScoreDisplay active={activeTeam === 2} onClick={() => setActiveTeam(2)} team={team2} />

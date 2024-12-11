@@ -1,17 +1,17 @@
-import { QUESTIONS } from "./questions";
 import { Question } from "../../models";
 
 interface QuestionSelectorProps {
   completed?: Question[];
   double?: boolean;
   onSelect: (question: Question) => void;
+  questions: Question[];
 }
-export const QuestionSelector = ({ completed = [], double = false, onSelect }: QuestionSelectorProps) => {
+export const QuestionSelector = ({ completed = [], double = false, onSelect, questions }: QuestionSelectorProps) => {
   return (
     <>
       <h1>Select a question</h1>
       <div className="game-board-grid">
-        { QUESTIONS.map((question, i) => (
+        { questions.map((question, i) => (
           <QuestionOption
             completed={Boolean(completed.find((curr) => curr.question === question.question))}
             index={i}
