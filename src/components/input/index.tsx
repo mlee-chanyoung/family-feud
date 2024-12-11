@@ -30,7 +30,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(({ error,
     <div {...groupProps} className={`input-group ${groupProps?.className}`}>
       <label className="input-label" htmlFor={props.id}>{label}</label>
       <select className={`input ${error && "input-error"} ${fullWidth && "input-fullwidth"}`} ref={ref} {...props}>
-        <option key="placeholder" value="">{props.placeholder}</option>
+        <option key="placeholder" value="">{props.placeholder || "---"}</option>
         {options.map((option, i) => <option key={i} value={option.value}>{option.label}</option>)}
       </select>
       {error && typeof error === "string" && <div className="input-error-label">{error}</div>}
